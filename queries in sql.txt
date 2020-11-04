@@ -1,0 +1,382 @@
+show tables;
++---------------------+
+| Tables_in_employee1 |
++---------------------+
+| cl                  |
+| client              |
+| em                  |
+| emp                 |
+| employee            |
+| employees           |
+| employees_audit     |
+| pr                  |
+| project             |
++---------------------+
+9 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| client_details     |
+| employee1          |
+| employeedetails    |
+| information_schema |
+| mysql              |
+| performance_schema |
+| project_details    |
+| student            |
+| student_marks      |
+| sudha              |
+| sys                |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use student;
+Database changed
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| std_id     | int         | NO   | PRI | NULL    |       |
+| first_name | varchar(40) | YES  |     | NULL    |       |
+| last_name  | varchar(20) | YES  |     | NULL    |       |
+| birth_day  | date        | YES  |     | NULL    |       |
+| branch_id  | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.10 sec)
+
+mysql> select * from student;
+Empty set (0.11 sec)
+
+mysql> insert into student(std_id,first_name,last_name,birth_day, branch_id)values(1,'sathya','sai','1998-05-6',1778);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into student(std_id,first_name,last_name,birth_day, branch_id)values(2,'sri','lokesh','1999-01-17',1568);
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into student(std_id,first_name,last_name,birth_day, branch_id)values(3,'valluri','ramya','1997-10-12',1875);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into student(std_id,first_name,last_name,birth_day, branch_id)values(4,'mohan','murali','1999-10-25',20875);
+Query OK, 1 row affected (0.22 sec)
+
+mysql> insert into student(std_id,first_name,last_name,birth_day, branch_id)values(5,'sai','pallavi','1998-1-29',2175);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into student(std_id,first_name,last_name,birth_day, branch_id)values(6,'sai','charitha','1998-10-09',5175);
+Query OK, 1 row affected (0.27 sec)
+
+mysql> select * from student;
++--------+------------+-----------+------------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id |
++--------+------------+-----------+------------+-----------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 |
+|      5 | sai        | pallavi   | 1998-01-29 |      2175 |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 |
++--------+------------+-----------+------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select student.first_name from student;
++------------+
+| first_name |
++------------+
+| sathya     |
+| sri        |
+| valluri    |
+| mohan      |
+| sai        |
+| sai        |
++------------+
+6 rows in set (0.00 sec)
+
+mysql> select student.last_name from student;
++-----------+
+| last_name |
++-----------+
+| sai       |
+| lokesh    |
+| ramya     |
+| murali    |
+| pallavi   |
+| charitha  |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select student.first_name from student ORDER BY first_name;
++------------+
+| first_name |
++------------+
+| mohan      |
+| sai        |
+| sai        |
+| sathya     |
+| sri        |
+| valluri    |
++------------+
+6 rows in set (0.10 sec)
+
+mysql> select student.last_name from student ORDER BY last_name;
++-----------+
+| last_name |
++-----------+
+| charitha  |
+| lokesh    |
+| murali    |
+| pallavi   |
+| ramya     |
+| sai       |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select student.first_name,student.last_name from student ORDER BY first_name;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| mohan      | murali    |
+| sai        | pallavi   |
+| sai        | charitha  |
+| sathya     | sai       |
+| sri        | lokesh    |
+| valluri    | ramya     |
++------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select student.first_name,student.birth_day from student ORDER BY birth_day;
++------------+------------+
+| first_name | birth_day  |
++------------+------------+
+| valluri    | 1997-10-12 |
+| sai        | 1998-01-29 |
+| sathya     | 1998-05-06 |
+| sai        | 1998-10-09 |
+| sri        | 1999-01-17 |
+| mohan      | 1999-10-25 |
++------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student ORDER BY branch_id;
++--------+------------+-----------+------------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id |
++--------+------------+-----------+------------+-----------+
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 |
+|      1 | sathya     | sai       | 1998-05-06 |      1778 |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 |
+|      5 | sai        | pallavi   | 1998-01-29 |      2175 |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 |
++--------+------------+-----------+------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student ORDER BY branch_id desc;
++--------+------------+-----------+------------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id |
++--------+------------+-----------+------------+-----------+
+|      4 | mohan      | murali    | 1999-10-25 |     20875 |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 |
+|      5 | sai        | pallavi   | 1998-01-29 |      2175 |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 |
+|      1 | sathya     | sai       | 1998-05-06 |      1778 |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 |
++--------+------------+-----------+------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student ORDER BY branch_id asc;
++--------+------------+-----------+------------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id |
++--------+------------+-----------+------------+-----------+
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 |
+|      1 | sathya     | sai       | 1998-05-06 |      1778 |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 |
+|      5 | sai        | pallavi   | 1998-01-29 |      2175 |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 |
++--------+------------+-----------+------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student ORDER BY std_id asc;
++--------+------------+-----------+------------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id |
++--------+------------+-----------+------------+-----------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 |
+|      5 | sai        | pallavi   | 1998-01-29 |      2175 |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 |
++--------+------------+-----------+------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student ORDER BY std_id asc LIMIT 4;
++--------+------------+-----------+------------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id |
++--------+------------+-----------+------------+-----------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 |
++--------+------------+-----------+------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select DISTINCT first_name from student;
++------------+
+| first_name |
++------------+
+| sathya     |
+| sri        |
+| valluri    |
+| mohan      |
+| sai        |
++------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student add column sub varchar(200);
+Query OK, 0 rows affected (1.87 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++--------+------------+-----------+------------+-----------+------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub  |
++--------+------------+-----------+------------+-----------+------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 | NULL |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 | NULL |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 | NULL |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 | NULL |
+|      5 | sai        | pallavi   | 1998-01-29 |      2175 | NULL |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 | NULL |
++--------+------------+-----------+------------+-----------+------+
+6 rows in set (0.00 sec)
+
+mysql> insert into student(sub)values('maths');
+ERROR 1364 (HY000): Field 'std_id' doesn't have a default value
+mysql> UPDATE student SET sub='maths'where  std_id=1;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE student SET sub='physics'where  std_id=2;
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE student SET sub='chemistry'where  std_id=3;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE student SET sub='chemistry'where  std_id=6;
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE student SET sub='maths'where  std_id=4;
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE student SET sub='english'where  std_id=5;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++--------+------------+-----------+------------+-----------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub       |
++--------+------------+-----------+------------+-----------+-----------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 | maths     |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 | physics   |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 | chemistry |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 | maths     |
+|      5 | sai        | pallavi   | 1998-01-29 |      2175 | english   |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 | chemistry |
++--------+------------+-----------+------------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student WHERE sub IN('maths','physics')AND std_id<6;
++--------+------------+-----------+------------+-----------+---------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub     |
++--------+------------+-----------+------------+-----------+---------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 | maths   |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 | physics |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 | maths   |
++--------+------------+-----------+------------+-----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student WHERE sub IN('maths','physics')AND std_id>2;
++--------+------------+-----------+------------+-----------+-------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub   |
++--------+------------+-----------+------------+-----------+-------+
+|      4 | mohan      | murali    | 1999-10-25 |     20875 | maths |
++--------+------------+-----------+------------+-----------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from student WHERE sub IN('maths')AND std_id>2;
++--------+------------+-----------+------------+-----------+-------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub   |
++--------+------------+-----------+------------+-----------+-------+
+|      4 | mohan      | murali    | 1999-10-25 |     20875 | maths |
++--------+------------+-----------+------------+-----------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from student WHERE sub IN('maths')AND std_id>=1;
++--------+------------+-----------+------------+-----------+-------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub   |
++--------+------------+-----------+------------+-----------+-------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 | maths |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 | maths |
++--------+------------+-----------+------------+-----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student WHERE sub IN('chemistry')AND std_id>=1;
++--------+------------+-----------+------------+-----------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub       |
++--------+------------+-----------+------------+-----------+-----------+
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 | chemistry |
+|      6 | sai        | charitha  | 1998-10-09 |      5175 | chemistry |
++--------+------------+-----------+------------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select DISTINCT last_name;
+ERROR 1054 (42S22): Unknown column 'last_name' in 'field list'
+mysql> select DISTINCT last_name from student;
++-----------+
+| last_name |
++-----------+
+| sai       |
+| lokesh    |
+| ramya     |
+| murali    |
+| pallavi   |
+| charitha  |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student ORDER BY std_id asc LIMIT 4;
++--------+------------+-----------+------------+-----------+-----------+
+| std_id | first_name | last_name | birth_day  | branch_id | sub       |
++--------+------------+-----------+------------+-----------+-----------+
+|      1 | sathya     | sai       | 1998-05-06 |      1778 | maths     |
+|      2 | sri        | lokesh    | 1999-01-17 |      1568 | physics   |
+|      3 | valluri    | ramya     | 1997-10-12 |      1875 | chemistry |
+|      4 | mohan      | murali    | 1999-10-25 |     20875 | maths     |
++--------+------------+-----------+------------+-----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select student.sub from student ORDER BY first_name;
++-----------+
+| sub       |
++-----------+
+| maths     |
+| english   |
+| chemistry |
+| maths     |
+| physics   |
+| chemistry |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
